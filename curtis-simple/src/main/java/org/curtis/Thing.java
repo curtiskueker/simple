@@ -1,11 +1,18 @@
 package org.curtis;
 
-/**
- * Created by curtis on 2/27/17.
- */
+import javax.persistence.*;
+
+@Entity
+@Table(name = "thing")
 public class Thing {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
 
     public Thing() {
