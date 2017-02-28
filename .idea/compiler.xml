@@ -10,7 +10,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="curtis-simple" target="1.5" />
+      <module name="curtis-simple" target="1.7" />
+      <module name="simple" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
