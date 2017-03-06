@@ -40,8 +40,8 @@ public class DBSessionFactory {
             jpaProperties.put("hibernate.connection.username", name);
             jpaProperties.put("hibernate.connection.password", password);
 
-            jpaProperties.put("hibernate.connection.driver_class", "org.postgresql.Driver");
-            jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
+            jpaProperties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+            jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
             jpaProperties.put("hibernate.show_sql", true);
             jpaProperties.put("hibernate.format_sql", true);
 

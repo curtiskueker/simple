@@ -1,4 +1,4 @@
-package org.curtis;
+package org.curtis.model;
 
 import javax.persistence.*;
 

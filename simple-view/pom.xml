@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>MM/dd/YYYY HH:mm:ss</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
+        <output.directory>/usr/share/tomcat/webapps</output.directory>
     </properties>
 
     <dependencies>
@@ -26,6 +27,7 @@
     </dependencies>
 
     <build>
+        <finalName>ROOT</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,14 +39,27 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <followSymLinks>false</followSymLinks>
+                    <cleanOutputDirectory>${output.directory}</cleanOutputDirectory>
+                    <filesets>
+                        <fileset>
+                            <directory>${output.directory}</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <classifier>simple</classifier>
                     <webResources>
                         <resource>
                             <directory>${project.basedir}/src/main/view/</directory>
-                            <targetPath>WEB-INF</targetPath>
+                            <targetPath></targetPath>
                             <filtering>true</filtering>
                         </resource>
                         <resource>
@@ -60,6 +75,7 @@
                             <Implementation-Title>${project.groupId}.${project.artifactId}</Implementation-Title>
                         </manifestEntries>
                     </archive>
+                    <outputDirectory>${output.directory}</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
