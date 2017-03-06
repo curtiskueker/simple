@@ -67,6 +67,11 @@
                             <targetPath>WEB-INF</targetPath>
                             <filtering>false</filtering>
                         </resource>
+                        <resource>
+                            <directory>${project.basedir}/src/main/metainf/</directory>
+                            <targetPath>WEB-INF/classes/META-INF</targetPath>
+                            <filtering>false</filtering>
+                        </resource>
                     </webResources>
                     <archive>
                         <manifestEntries>

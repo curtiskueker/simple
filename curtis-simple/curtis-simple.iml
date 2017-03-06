@@ -26,5 +26,7 @@
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-ehcache:4.3.8.Final" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache-core:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.41" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml:classmate:0.8.0" level="project" />
   </component>
 </module>
