@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Table(name = "thing")
 public class Thing extends DatabaseItem {
     @Column(name = "name")
-    private String name;
+    private String name = "";
 
     @Column(name = "description")
-    private String description;
+    private String description = "";
 
     public Thing() {
 

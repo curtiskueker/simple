@@ -8,7 +8,19 @@
 <body>
 <table>
     <tr>
-        <td><b>List Page</b></td>
+        <td colspan="3"><b>List Page</b></td>
+    </tr>
+    <%
+        if(errorMessage != null) {
+    %>
+    <tr>
+        <td colspan="3"><%= errorMessage %></td>
+    </tr>
+    <%
+        }
+    %>
+    <tr>
+        <td colspan="3"><a href="/thing/new">New Thing</a></td>
     </tr>
     <%
         if(things != null) {
@@ -16,18 +28,10 @@
     %>
     <tr>
         <td><%= thing.getName() %></td>
+        <td><%= thing.getDescription() %></td>
     </tr>
     <%
             }
-        }
-    %>
-    <%
-        if(errorMessage != null) {
-    %>
-    <tr>
-        <td><%= errorMessage %></td>
-    </tr>
-    <%
         }
     %>
 </table>
