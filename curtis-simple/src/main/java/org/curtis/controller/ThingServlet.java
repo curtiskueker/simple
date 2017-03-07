@@ -69,4 +69,20 @@ public class ThingServlet {
 
         return new ModelAndView("thing", "thing", thing);
     }
+
+    @RequestMapping(value="/delete")
+    public ModelAndView deleteThing(HttpServletRequest request) {
+        if(request.getParameter("thingId") != null) {
+            Integer thingId = Integer.parseInt(request.getParameter("thingId"));
+            try {
+                Thing thing = DatabaseItemManager.getInstance().find(Thing.class, thingId);
+                if(thing != null) {
+                    DBSessionFactory.getInstance().getTransaction().delete(thing);
+                }
+            } catch (DBException e) {
+                request.setAttribute("errorMessage", e.getMessage());
+            }
+        }
+        return list();
+    }
 }

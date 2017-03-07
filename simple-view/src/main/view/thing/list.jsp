@@ -30,6 +30,7 @@
         <td><%= thing.getName() %></td>
         <td><%= thing.getDescription() %></td>
         <td><a href="/thing/update?thingId=<%= thing.getId() %>">Update</a></td>
+        <td><a href="/thing/delete?thingId=<%= thing.getId() %>">Delete</a></td>
     </tr>
     <%
             }
