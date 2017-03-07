@@ -11,6 +11,16 @@
         simple web app
     </description>
 
+    <filter>
+        <filter-name>databaseFilter</filter-name>
+        <filter-class>org.curtis.filter.DatabaseFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>databaseFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>ThingServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

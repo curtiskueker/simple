@@ -1,14 +1,12 @@
 package org.curtis.model;
 
+import org.curtis.database.DatabaseItem;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "thing")
-public class Thing {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Thing extends DatabaseItem {
     @Column(name = "name")
     private String name;
 
@@ -17,14 +15,6 @@ public class Thing {
 
     public Thing() {
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

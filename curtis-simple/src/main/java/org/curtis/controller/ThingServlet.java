@@ -1,5 +1,8 @@
 package org.curtis.controller;
 
+import org.curtis.database.DBException;
+import org.curtis.database.DatabaseItemManager;
+import org.curtis.model.Thing;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,9 +15,14 @@ import java.util.List;
 public class ThingServlet {
     @RequestMapping(value = "/list")
     public ModelAndView list() {
-        List<String> things = new ArrayList<>();
-        things.add("thing 1");
-        things.add("thing 2");
+        List<Thing> things = new ArrayList<>();
+
+        try {
+            things = DatabaseItemManager.getInstance().findAll(Thing.class);
+        } catch (DBException e) {
+            e.printStackTrace();
+            return new ModelAndView("list", "errorMessage", e.getMessage());
+        }
 
         return new ModelAndView("list", "things", things);
     }
