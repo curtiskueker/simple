@@ -8,19 +8,19 @@
 <body>
 <table>
     <tr>
-        <td colspan="3"><b>List Page</b></td>
+        <td colspan="4"><b>List Page</b></td>
     </tr>
     <%
         if(errorMessage != null) {
     %>
     <tr>
-        <td colspan="3"><%= errorMessage %></td>
+        <td colspan="4"><%= errorMessage %></td>
     </tr>
     <%
         }
     %>
     <tr>
-        <td colspan="3"><a href="/thing/new">New Thing</a></td>
+        <td colspan="4"><a href="/thing/update">New Thing</a></td>
     </tr>
     <%
         if(things != null) {
@@ -29,6 +29,7 @@
     <tr>
         <td><%= thing.getName() %></td>
         <td><%= thing.getDescription() %></td>
+        <td><a href="/thing/update?thingId=<%= thing.getId() %>">Update</a></td>
     </tr>
     <%
             }

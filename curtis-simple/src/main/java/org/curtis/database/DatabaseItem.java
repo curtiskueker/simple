@@ -22,4 +22,8 @@ public abstract class DatabaseItem {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public boolean isPersisted() {
+        return id != null;
+    }
 }

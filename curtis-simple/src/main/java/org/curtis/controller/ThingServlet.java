@@ -30,11 +30,24 @@ public class ThingServlet {
         return new ModelAndView("list", "things", things);
     }
 
-    @RequestMapping(value="/new")
-    public ModelAndView addThing(HttpServletRequest request) {
+    @RequestMapping(value="/update")
+    public ModelAndView updateThing(HttpServletRequest request) {
         Thing thing = new Thing();
+        if(request.getParameter("thingId") != null) {
+            Integer thingId = Integer.parseInt(request.getParameter("thingId"));
+            try {
+                thing = DatabaseItemManager.getInstance().find(Thing.class, thingId);
+            } catch (DBException e) {
+                request.setAttribute("errorMessage", e.getMessage());
+                return list();
+            }
+        }
 
-        if(request.getParameter("addThing") != null) {
+        if(request.getParameter("updateThing") != null) {
+            if(thing == null) {
+                return list();
+            }
+
             String name = request.getParameter("name");
             String description = request.getParameter("description");
 
@@ -44,7 +57,9 @@ public class ThingServlet {
                 thing.setName(name);
                 thing.setDescription(description);
                 try {
-                    DBSessionFactory.getInstance().getTransaction().create(thing);
+                    if (!thing.isPersisted()) {
+                        DBSessionFactory.getInstance().getTransaction().create(thing);
+                    }
                     return list();
                 } catch (DBException e) {
                     request.setAttribute("errorMessage", e.getMessage());
@@ -52,6 +67,6 @@ public class ThingServlet {
             }
         }
 
-        return new ModelAndView("newThing", "thing", thing);
+        return new ModelAndView("thing", "thing", thing);
     }
 }
