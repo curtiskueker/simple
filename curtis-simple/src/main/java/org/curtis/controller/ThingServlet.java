@@ -18,16 +18,16 @@ import java.util.List;
 public class ThingServlet {
     @RequestMapping(value = "/list")
     public ModelAndView list() {
-        List<Thing> things = new ArrayList<>();
+        ModelAndView modelAndView = new ModelAndView("list");
 
         try {
-            things = DatabaseItemManager.getInstance().findAll(Thing.class);
+            List<Thing> things = DatabaseItemManager.getInstance().findAll(Thing.class);
+            modelAndView.addObject("things", things);
         } catch (DBException e) {
-            e.printStackTrace();
-            return new ModelAndView("list", "errorMessage", e.getMessage());
+            modelAndView.addObject("errorMessage", e.getMessage());
         }
 
-        return new ModelAndView("list", "things", things);
+        return modelAndView;
     }
 
     @RequestMapping(value="/update")
