@@ -20,7 +20,7 @@
         }
     %>
     <tr>
-        <td colspan="4"><a href="/thing/update">New Thing</a></td>
+        <td colspan="4"><a href="/thing/update/0">New Thing</a></td>
     </tr>
     <%
         if(things != null) {
@@ -29,8 +29,8 @@
     <tr>
         <td><%= thing.getName() %></td>
         <td><%= thing.getDescription() %></td>
-        <td><a href="/thing/update?thingId=<%= thing.getId() %>">Update</a></td>
-        <td><a href="/thing/delete?thingId=<%= thing.getId() %>">Delete</a></td>
+        <td><a href="/thing/update/<%= thing.getId() %>">Update</a></td>
+        <td><a href="/thing/delete/<%= thing.getId() %>">Delete</a></td>
     </tr>
     <%
             }

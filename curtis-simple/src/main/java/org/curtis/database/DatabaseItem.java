@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class DatabaseItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id = 0;
 
     protected DatabaseItem() {
         super();
@@ -24,6 +24,6 @@ public abstract class DatabaseItem {
     }
 
     public boolean isPersisted() {
-        return id != null;
+        return id != null && id > 0;
     }
 }

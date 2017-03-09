@@ -33,7 +33,7 @@
     <%
         }
     %>
-    <form method="post" action="/thing/update">
+    <form method="post" action="/thing/update/<%= thing.getId() %>">
         <%
             if(thing.isPersisted()) {
         %>
@@ -82,13 +82,6 @@
             </td>
         </tr>
         <input type="hidden" name="updateThing" value="true">
-        <%
-            if(thing.isPersisted()) {
-                %>
-        <input type="hidden" name="thingId" value="<%= thing.getId() %>">
-        <%
-            }
-        %>
     </form>
 </table>
 </body>

@@ -1,6 +1,7 @@
 package org.curtis.model;
 
 import org.curtis.database.DatabaseItem;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -8,9 +9,11 @@ import javax.persistence.*;
 @Table(name = "thing")
 public class Thing extends DatabaseItem {
     @Column(name = "name")
+    @NotEmpty
     private String name = "";
 
     @Column(name = "description")
+    @NotEmpty
     private String description = "";
 
     public Thing() {
