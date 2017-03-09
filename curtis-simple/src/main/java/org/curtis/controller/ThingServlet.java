@@ -6,11 +6,15 @@ import org.curtis.database.DatabaseItemManager;
 import org.curtis.model.Thing;
 import org.curtis.util.StringUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,50 +41,56 @@ public class ThingServlet {
         return new ModelAndView("thing", "thing", thing);
     }
 
-    @RequestMapping(value="/update/{thingId}")
-    public ModelAndView updateThing(@PathVariable Integer thingId, HttpServletRequest request) {
+    @RequestMapping(value="/update/{id}")
+    public ModelAndView updateThing(@Valid @ModelAttribute("thing") Thing newThing, BindingResult result, @PathVariable Integer id, HttpServletRequest request) {
         Thing thing = new Thing();
 
         try {
-            if (thingId > 0) {
-                thing = DatabaseItemManager.getInstance().find(Thing.class, thingId);
+            if (id > 0) {
+                thing = DatabaseItemManager.getInstance().find(Thing.class, id);
             }
         } catch (DBException e) {
             request.setAttribute("errorMessage", e.getMessage());
             return list();
         }
 
+        ModelAndView defaultView = new ModelAndView("thing", "thing", thing);
+
         if(request.getParameter("updateThing") != null) {
             if(thing == null) {
                 return list();
             }
 
-            String name = request.getParameter("name");
-            String description = request.getParameter("description");
-
-            if(StringUtil.isEmpty(name) || StringUtil.isEmpty(description)) {
-                request.setAttribute("errorMessage", "Required field not found");
-            } else {
-                thing.setName(name);
-                thing.setDescription(description);
-                try {
-                    if (!thing.isPersisted()) {
-                        DBSessionFactory.getInstance().getTransaction().create(thing);
-                    }
-                    return list();
-                } catch (DBException e) {
-                    request.setAttribute("errorMessage", e.getMessage());
+            if(result.hasFieldErrors()) {
+                String errorMessage = "";
+                List<FieldError> fieldErrors = result.getFieldErrors();
+                for(FieldError fieldError : fieldErrors) {
+                    errorMessage += fieldError.getField() + ": " + fieldError.getDefaultMessage() + " ";
                 }
+                request.setAttribute("errorMessage", errorMessage);
+                defaultView.addObject("thing", newThing);
+                return defaultView;
+            }
+
+            thing.setName(newThing.getName());
+            thing.setDescription(newThing.getDescription());
+            try {
+                if (!thing.isPersisted()) {
+                    DBSessionFactory.getInstance().getTransaction().create(thing);
+                }
+                return list();
+            } catch (DBException e) {
+                request.setAttribute("errorMessage", e.getMessage());
             }
         }
 
-        return new ModelAndView("thing", "thing", thing);
+        return defaultView;
     }
 
-    @RequestMapping(value="/delete/{thingId}")
-    public ModelAndView deleteThing(@PathVariable Integer thingId, HttpServletRequest request) {
+    @RequestMapping(value="/delete/{id}")
+    public ModelAndView deleteThing(@PathVariable Integer id, HttpServletRequest request) {
         try {
-            Thing thing = DatabaseItemManager.getInstance().find(Thing.class, thingId);
+            Thing thing = DatabaseItemManager.getInstance().find(Thing.class, id);
             if(thing != null) {
                 DBSessionFactory.getInstance().getTransaction().delete(thing);
             }

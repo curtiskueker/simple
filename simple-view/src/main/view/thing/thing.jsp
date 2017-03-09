@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page import="org.curtis.model.Thing" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -33,7 +34,7 @@
     <%
         }
     %>
-    <form method="post" action="/thing/update/<%= thing.getId() %>">
+    <form:form modelAttribute="thing" method="post" action="/thing/update/${thing.id}">
         <%
             if(thing.isPersisted()) {
         %>
@@ -53,7 +54,7 @@
                 Name
             </td>
             <td align="left">
-                <input type="text" name="name" value="<%= thing.getName() %>">
+                <form:input path="name"/>
             </td>
         </tr>
         <tr>
@@ -61,7 +62,7 @@
                 Description
             </td>
             <td align="left">
-                <input type="text" name="description" value="<%= thing.getDescription() %>">
+                <form:input path="description"/>
             </td>
         </tr>
         <tr>
@@ -82,7 +83,7 @@
             </td>
         </tr>
         <input type="hidden" name="updateThing" value="true">
-    </form>
+    </form:form>
 </table>
 </body>
 </html>
