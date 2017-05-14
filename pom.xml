@@ -12,5 +12,6 @@
     <modules>
         <module>curtis-simple</module>
         <module>simple-view</module>
+        <module>bin</module>
     </modules>
 </project>
