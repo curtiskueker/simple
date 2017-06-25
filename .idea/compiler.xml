@@ -11,8 +11,8 @@
         <module name="simple-view" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="bin" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="bin" target="1.8" />
       <module name="curtis-simple" target="1.7" />
       <module name="simple" target="1.5" />
       <module name="simple-view" target="1.8" />
