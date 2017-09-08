@@ -1,10 +1,7 @@
 package org.curtis.bin;
 
-import java.awt.event.ActionListener;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Scratch {
     public static void main(String args[]){
@@ -20,5 +17,9 @@ public class Scratch {
         System.err.println(sum2);
         System.err.println("sum: " + sum + sum2);
         System.err.println(sum + sum2 + " sum");
+    }
+
+    public static <T> void checkList (List<T> list) {
+
     }
 }
