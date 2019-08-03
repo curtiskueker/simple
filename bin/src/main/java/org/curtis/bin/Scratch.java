@@ -17,6 +17,7 @@ public class Scratch {
         System.err.println(sum2);
         System.err.println("sum: " + sum + sum2);
         System.err.println(sum + sum2 + " sum");
+        System.err.println("Done");
     }
 
     public static <T> void checkList (List<T> list) {
