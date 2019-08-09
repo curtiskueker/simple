@@ -9,12 +9,14 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class TasksApplication extends Application {
+    public static Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("javafx/musicxmltasks.fxml")));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("MusicXml Tasks");
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
