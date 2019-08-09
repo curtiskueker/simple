@@ -1,34 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 
 <VBox fx:id="taskBox" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.curtis.javafx.TasksController">
    <children>
       <TabPane fx:id="taskTabs" prefHeight="700.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="convertTab" text="Convert">
+          <Tab fx:id="convertTab" text="Convert Files">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-          <Tab fx:id="settingsTab" text="Settings">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <Tab fx:id="settingsTab" text="Database Settings">
+               <content>
+                  <VBox fx:id="settingsBox">
                      <children>
-                        <Button fx:id="statusButton" mnemonicParsing="false" onAction="#handleButtonAction" text="Display Status" />
+                        <Label fx:id="settingsLabel" alignment="CENTER" contentDisplay="CENTER" text="Database Settings">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="20.0" left="200.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <GridPane fx:id="settingsPane">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" percentHeight="4.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="usernameLabel" text="Username:" GridPane.halignment="RIGHT">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="passwordLabel" text="Password:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="databaseNameLabel" text="Database Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="serverLabel" text="Server:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="databaseTypelabel" text="Database Type:" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="testDatabaseConnectionLabel" text="Test Database Connection:" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="dbUsername" maxWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                              <TextField fx:id="dbName" maxWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="dbServer" maxWidth="175.0" prefWidth="175.0" text="localhost" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <PasswordField fx:id="dbPassword" maxWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <CheckBox fx:id="showPassword" mnemonicParsing="false" text="Show password" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="testDbConnection" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
+                              <ComboBox fx:id="dbType" maxWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+                              <Button fx:id="saveSettingsButton" mnemonicParsing="false" onAction="#saveSettings" text="Save Settings" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+                           </children>
+                        </GridPane>
                      </children>
-                  </AnchorPane>
-            </content>
+                  </VBox>
+               </content>
           </Tab>
-            <Tab fx:id="tablesTab" text="Tables">
+            <Tab fx:id="tablesTab" text="Database Tables">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab fx:id="lyPdfTab" text="Lilypond/Pdf">
+            <Tab fx:id="lyPdfTab" text="Lilypond/Pdf Settings">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

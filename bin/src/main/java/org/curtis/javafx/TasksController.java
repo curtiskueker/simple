@@ -6,8 +6,13 @@ import javafx.scene.control.TextArea;
 
 public class TasksController {
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void saveSettings(ActionEvent event) {
+        appendText("Database settings saved");
+    }
+
+    private void appendText(String text) {
         TextArea statusTextArea = (TextArea)TasksApplication.scene.lookup("#statusTextArea");
-        statusTextArea.appendText("Button pressed\n");
+        statusTextArea.appendText(text);
+        statusTextArea.appendText("\n");
     }
 }
