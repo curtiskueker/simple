@@ -95,7 +95,7 @@
                               <TextField fx:id="dbName" maxWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <TextField fx:id="dbServer" maxWidth="175.0" prefWidth="175.0" text="localhost" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <PasswordField fx:id="dbPassword" maxWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                              <CheckBox fx:id="showPassword" mnemonicParsing="false" text="Show password" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <CheckBox fx:id="showPassword" mnemonicParsing="false" onAction="#showPassword" text="Show password" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
@@ -110,9 +110,62 @@
                </content>
           </Tab>
             <Tab fx:id="tablesTab" text="Database Tables">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
+               <content>
+                  <VBox fx:id="tablesBox" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="tablesLabel" alignment="CENTER" contentDisplay="CENTER" text="Database Tables">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="20.0" left="200.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <GridPane fx:id="tablesPane" prefHeight="596.0" prefWidth="600.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="createTablesLabel" text="Create Database Tables:" GridPane.halignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="generateSchemaLabel" text="Generate Database Schema:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <CheckBox fx:id="createTables" mnemonicParsing="false" GridPane.columnIndex="1" />
+                              <CheckBox fx:id="generateSchema" mnemonicParsing="false" onAction="#showSchemaFileLocation" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button fx:id="executeTables" mnemonicParsing="false" onAction="#executeTables" text="OK" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                              <Hyperlink fx:id="chooseSchemaLocationLink" onAction="#chooseSchemaLocation" text="Choose schema location" visible="false" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Hyperlink>
+                              <TextField fx:id="schemaFileLocation" maxWidth="300.0" prefWidth="300.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
             </Tab>
             <Tab fx:id="lyPdfTab" text="Lilypond/Pdf Settings">
               <content>
