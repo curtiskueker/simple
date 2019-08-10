@@ -47,6 +47,31 @@ public class TasksController {
         appendText("Database action executed");
     }
 
+    @FXML
+    private void setLilypondLocation() {
+        TextField textField = (TextField)getNode("lilypondLocation");
+        textField.setText(getFileLocation());
+    }
+
+    @FXML
+    private void setPdfLocation() {
+        TextField textField = (TextField)getNode("pdfLocation");
+        textField.setText(getFileLocation());
+    }
+
+    @FXML
+    private void executeLyPdf() {
+        appendText("Lilypond/PDF action executed");
+    }
+
+    private String getFileLocation() {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(TasksApplication.stage);
+        if (file == null) return "";
+
+        return file.getAbsolutePath();
+    }
+
     private boolean checkboxOn(String controlName) {
         CheckBox checkBox = (CheckBox)getNode(controlName);
 
