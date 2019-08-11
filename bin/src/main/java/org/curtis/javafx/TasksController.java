@@ -8,8 +8,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TasksController {
+    private static final List<String> fromBoxes = new ArrayList<>(Arrays.asList("musicXmlFromBox", "dbFromBox", "lyFromBox"));
+    private static final List<String> toBoxes = new ArrayList<>(Arrays.asList("musicXmlToBox", "dbToBox", "lyToBox", "pdfToBox"));
+
     @FXML
     private void saveSettings() {
         appendText("Database settings saved");
@@ -43,20 +49,83 @@ public class TasksController {
     }
 
     @FXML
+    private void showMusicXmlFrom() {
+        showFromBox("musicXmlFromBox");
+    }
+
+    @FXML
+    private void showDbFrom() {
+        showFromBox("dbFromBox");
+    }
+
+    @FXML
+    private void showLyFrom() {
+        showFromBox("lyFromBox");
+    }
+
+    @FXML
+    private void showMusicXmlTo() {
+        showToBox("musicXmlToBox");
+    }
+
+    @FXML
+    private void showDbTo() {
+        showToBox("dbToBox");
+    }
+
+    @FXML
+    private void showLyTo() {
+        showToBox("lyToBox");
+    }
+
+    @FXML
+    private void showPdfTo() {
+        showToBox("pdfToBox");
+    }
+
+    @FXML
+    private void chooseMusicXmlFromFile() {
+        setFileLocationInTextField("musicXmlFromFile");
+    }
+
+    @FXML
+    private void chooseLyFromFile() {
+        setFileLocationInTextField("lyFromFile");
+    }
+
+    @FXML
+    private void chooseMusicXmlToFile() {
+        setFileLocationInTextField("musicXmlToFile");
+    }
+
+    @FXML
+    private void chooseLyToFile() {
+        setFileLocationInTextField("lyToFile");
+    }
+
+    @FXML
+    private void choosePdfToFile() {
+        setFileLocationInTextField("pdfToFile");
+    }
+
+    @FXML
+    private void executeConvert() {
+        appendText("Convert action executed");
+    }
+
+    @FXML
     private void executeTables() {
         appendText("Database action executed");
     }
 
     @FXML
     private void setLilypondLocation() {
-        TextField textField = (TextField)getNode("lilypondLocation");
-        textField.setText(getFileLocation());
+        setFileLocationInTextField("lilypondLocation");
     }
 
     @FXML
     private void setPdfLocation() {
-        TextField textField = (TextField)getNode("pdfLocation");
-        textField.setText(getFileLocation());
+        setFileLocationInTextField("pdfLocation");
     }
 
     @FXML
@@ -64,12 +133,13 @@ public class TasksController {
         appendText("Lilypond/PDF action executed");
     }
 
-    private String getFileLocation() {
+    private void setFileLocationInTextField(String textFieldName) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(TasksApplication.stage);
-        if (file == null) return "";
+        if (file == null) return;
 
-        return file.getAbsolutePath();
+        TextField textField = (TextField)getNode(textFieldName);
+        textField.setText(file.getAbsolutePath());
     }
 
     private boolean checkboxOn(String controlName) {
@@ -80,6 +150,18 @@ public class TasksController {
 
     private Node getNode(String nodeName) {
         return TasksApplication.scene.lookup("#" + nodeName);
+    }
+
+    private void showFromBox(String boxName) {
+        showBox(fromBoxes, boxName);
+    }
+
+    private void showToBox(String boxName) {
+        showBox(toBoxes, boxName);
+    }
+
+    private void showBox(List<String> boxes, String boxName) {
+        for (String box : boxes) getNode(box).setVisible(box.equals(boxName));
     }
 
     private void appendText(String text) {

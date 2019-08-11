@@ -11,9 +11,256 @@
       <TabPane fx:id="taskTabs" prefHeight="700.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="convertTab" text="Convert Files">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
+               <content>
+                  <VBox fx:id="convertBox" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="convertLabel" alignment="CENTER" contentDisplay="CENTER" text="Convert Files">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="20.0" left="210.0" top="20.0" />
+                           </padding>
+                        </Label>
+                         <HBox fx:id="toFromLists" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane fx:id="convertFromListPane" maxWidth="275.0" prefWidth="275.0">
+                                 <children>
+                                    <ComboBox fx:id="convertFromList" layoutX="50.0" layoutY="13.0" maxWidth="200.0" prefWidth="200.0" />
+                                 </children>
+                              </Pane>
+                              <Label fx:id="convertArrow" alignment="CENTER" maxWidth="50.0" prefWidth="50.0" text="-&gt;">
+                                 <HBox.margin>
+                                    <Insets top="18.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Pane fx:id="convertToListPane" maxWidth="275.0" prefWidth="275.0">
+                                 <children>
+                                    <ComboBox fx:id="convertToList" layoutX="30.0" layoutY="13.0" maxWidth="200.0" prefWidth="200.0" />
+                                 </children>
+                              </Pane>
+                           </children></HBox>
+                         <HBox fx:id="buttonBox" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <HBox fx:id="buttonBoxLeft" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="musicXmlLeft" mnemonicParsing="false" onAction="#showMusicXmlFrom" text="MusicXml" />
+                                    <Button fx:id="dbLeft" mnemonicParsing="false" onAction="#showDbFrom" text="Db" />
+                                    <Button fx:id="lyLeft" mnemonicParsing="false" onAction="#showLyFrom" text="Ly" />
+                                 </children>
+                              </HBox>
+                               <Pane fx:id="paneCenter" prefHeight="200.0" prefWidth="200.0" />
+                              <HBox fx:id="buttonBoxRight" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="musicXmlRight" mnemonicParsing="false" onAction="#showMusicXmlTo" text="MusicXml" />
+                                    <Button fx:id="dbRight" mnemonicParsing="false" onAction="#showDbTo" text="Db" />
+                                    <Button fx:id="lyRight" mnemonicParsing="false" onAction="#showLyTo" text="Ly" />
+                                    <Button fx:id="pdfRight" mnemonicParsing="false" onAction="#showPdfTo" text="Pdf" />
+                                 </children>
+                              </HBox>
+                           </children></HBox>
+                        <SplitPane fx:id="toFromSplitPane" dividerPositions="0.5" prefHeight="600.0" prefWidth="600.0">
+                           <items>
+                              <StackPane fx:id="fromPane" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox fx:id="musicXmlFromBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="musicXmlFromFileLabel" text="Music XML Input File:">
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Hyperlink fx:id="musicXmlFromFileLink" onAction="#chooseMusicXmlFromFile" text="Choose File">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Hyperlink>
+                                          <TextField fx:id="musicXmlFromFile" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="dbFromBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="dbFromLabel" text="Read From Database:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="scoreNameFromLabel" text="Score Name:">
+                                             <padding>
+                                                <Insets left="10.0" top="12.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="scoreNameFrom" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="lyFromBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="lyFromFileLabel" text="Lilypond Input File:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Hyperlink fx:id="lyFromFileLink" onAction="#chooseLyFromFile" text="Choose File">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Hyperlink>
+                                          <TextField fx:id="lyFromFile" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="toPane" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox fx:id="musicXmlToBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="musicXmlToFileLabel" text="Music XML Output File:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Hyperlink fx:id="musicXmlToFileLink" onAction="#chooseMusicXmlToFile" text="Choose File">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Hyperlink>
+                                          <TextField fx:id="musicXmlToFile" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <CheckBox fx:id="skipComments" mnemonicParsing="false" text="Skip Comments">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="dbToBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="dbToLabel" text="Write To Database:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="scoreNameToLabel" text="Score Name:">
+                                             <padding>
+                                                <Insets left="10.0" top="12.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="scoreNameTo" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="lyToBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="lyToFileLabel" text="Lilypond Output File:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Hyperlink fx:id="lyToFileLink" onAction="#chooseLyToFile" text="Choose File">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Hyperlink>
+                                          <TextField fx:id="lyToFile" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <CheckBox fx:id="includePageBreaks" mnemonicParsing="false" text="Incllude Page and System Breaks">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="pdfToBox" prefHeight="200.0" prefWidth="100.0" visible="false">
+                                       <children>
+                                          <Label fx:id="pdfToFileLabel" text="PDF Output File:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Hyperlink fx:id="pdfToFileLink" onAction="#choosePdfToFile" text="Choose File">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Hyperlink>
+                                          <TextField fx:id="lyToFile1" maxWidth="250.0" prefWidth="250.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                           </items>
+                        </SplitPane>
+                        <Pane fx:id="executeConvertPane" prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="executeConvert" layoutX="300.0" layoutY="10.0" mnemonicParsing="false" onAction="#executeConvert" text="Convert" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </content>
           </Tab>
            <Tab fx:id="validateTab" text="Validate XML">
               
